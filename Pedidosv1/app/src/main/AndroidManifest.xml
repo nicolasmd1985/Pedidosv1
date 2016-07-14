@@ -21,7 +21,7 @@
         <activity android:name=".Register" />
         <activity android:name=".pedidos" />
         <activity android:name=".consultas" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Detalles_pedido"></activity>
     </application>
 
 </manifest>

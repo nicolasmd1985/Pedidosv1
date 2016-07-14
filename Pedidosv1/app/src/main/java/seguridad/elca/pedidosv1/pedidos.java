@@ -23,6 +23,8 @@ import java.util.List;
 import android.widget.TextView;
 
 import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
 
 public class pedidos extends ActionBarActivity {
 
@@ -48,6 +50,7 @@ public class pedidos extends ActionBarActivity {
     private static final String TAG_ID = "idauxpedido";
     private static final String TAG_NOMBRE = "Empresa";
     private static final String TAG_IDSOPORTE = "Numero";
+    private static final String TAG_PROBLEMA = "Problema";
     //private static final String TAG_SOPORTE = "idnumsoporte";
 
     // products JSONArray
@@ -71,6 +74,8 @@ public class pedidos extends ActionBarActivity {
     }
 
 
+   // public class Lead {}
+
     //*****************PRINCIPAL*********************
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +94,41 @@ public class pedidos extends ActionBarActivity {
         new LoadAllProducts().execute();
         lista = (ListView) findViewById(R.id.listAllProducts);
 
+
+
+
+
+
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), "presiono " + i, Toast.LENGTH_SHORT).show();
+
+                //enviar datos de una actividad a otra
+
+
+
+                Intent x = new Intent(pedidos.this, Detalles_pedido.class);
+                x.putExtra("cadena", empresaList.get(i).toString());
+                startActivity(x);
+            }
+        });
+
+
+
+
+
+
+
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), "presiono LARGO " + empresaList.get(i), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -97,7 +137,7 @@ public class pedidos extends ActionBarActivity {
 
 
 
-
+//***************************OBTENCION DATOS DE LAS BD********************************
 
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
@@ -152,6 +192,7 @@ public class pedidos extends ActionBarActivity {
                         String id = c.getString(TAG_ID);
                         String name = c.getString(TAG_NOMBRE);
                         String idsop = c.getString(TAG_IDSOPORTE);
+                        String idpro = c.getString(TAG_PROBLEMA);
                         // creating new HashMap
                         HashMap map = new HashMap();
 
@@ -159,6 +200,7 @@ public class pedidos extends ActionBarActivity {
                         map.put(TAG_ID, id);
                         map.put(TAG_NOMBRE, name);
                         map.put(TAG_IDSOPORTE, idsop);
+                        map.put(TAG_PROBLEMA, idpro);
 
                         empresaList.add(map);
                     }
@@ -191,7 +233,8 @@ public class pedidos extends ActionBarActivity {
                             new String[] {
                                     TAG_ID,
                                     TAG_NOMBRE,
-                                    TAG_IDSOPORTE,
+                                    //TAG_IDSOPORTE,
+                                    TAG_PROBLEMA
 
 
                             },
