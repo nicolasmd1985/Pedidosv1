@@ -128,6 +128,7 @@ public class Login extends Activity implements OnClickListener {
                     edit.putString("username", username);
                     edit.commit();
                     Intent i = new Intent(Login.this, pedidos.class);
+
                     //enviar datos de una actividad a otra
                     i.putExtra("nombre", json.getString(TAG_TECNICO));
 

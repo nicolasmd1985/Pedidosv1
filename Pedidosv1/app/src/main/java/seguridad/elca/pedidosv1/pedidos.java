@@ -42,7 +42,7 @@ public class pedidos extends ActionBarActivity {
 
 
     // url to get all products list
-    private static String url_all_empresas = "http://192.168.5.48:2122/nicolas/pedidostec/get_pedido.php";
+    private static String url_all_empresas = "http://192.168.5.48:2122/nicolas/pedidostecv1/get_pedido.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -59,6 +59,8 @@ public class pedidos extends ActionBarActivity {
     ListView lista;
 
 
+
+    String tecnico;
 
 //****************ESTO ES PARA DEVOLVERSE*****************
 
@@ -94,11 +96,12 @@ public class pedidos extends ActionBarActivity {
         new LoadAllProducts().execute();
         lista = (ListView) findViewById(R.id.listAllProducts);
 
-
-
-
-
-
+            if(getIntent().getStringExtra("nombre")==null) {
+                tecnico = getIntent().getStringExtra("tecnico");
+            }
+            if (getIntent().getStringExtra("tecnico")==null){
+                tecnico = getIntent().getStringExtra("nombre");
+            }
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,11 +109,12 @@ public class pedidos extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "presiono " + i, Toast.LENGTH_SHORT).show();
 
                 //enviar datos de una actividad a otra
-
+                //empresaList.get(i);
 
 
                 Intent x = new Intent(pedidos.this, Detalles_pedido.class);
                 x.putExtra("cadena", empresaList.get(i).toString());
+                x.putExtra("tecnico",tecnico.toString());
                 startActivity(x);
             }
         });
@@ -161,8 +165,8 @@ public class pedidos extends ActionBarActivity {
         protected String doInBackground(String... args) {
             // Building Parameters
             List params = new ArrayList();
-            String username = getIntent().getStringExtra("nombre");
-            params.add(new BasicNameValuePair("username", username));
+
+            params.add(new BasicNameValuePair("username", tecnico));
             // getting JSON string from URL
            // JSONObject json = jParser.makeHttpRequest(url_all_empresas, "GET", params);
 
