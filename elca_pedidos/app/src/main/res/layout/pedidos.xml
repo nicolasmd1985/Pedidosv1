@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="PEDIDOS PENDIENTES"
+        android:id="@+id/textView8"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tecnico:"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/textView8"
+        android:textColor="@android:color/background_dark"
+        android:textSize="@dimen/abc_dialog_padding_top_material" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView9"
+        android:text="New Text"
+        android:id="@+id/nmtec"
+        android:textColor="#163ef0" />
+
+    <ListView
+        android:id="@+id/listAllProducts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nmtec"
+        android:dividerHeight="3dp"
+        android:background="#fff"
+        android:choiceMode="multipleChoice" />
+
+
+</RelativeLayout>
